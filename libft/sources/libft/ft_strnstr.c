@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/20 15:14:29 by trpham           ###   ########.fr       */
+/*   Created: 2024/11/05 21:45:57 by trpham            #+#    #+#             */
+/*   Updated: 2025/01/16 12:36:22 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include <stdio.h>
+#include "../../includes/libft.h"
 
-typedef struct s_command
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	
-}	t_command;
+	size_t	little_len;
+
+	if ((!big && !len))
+		return (NULL);
+	little_len = ft_strlen(little);
+	if (*little == '\0')
+		return ((char *)big);
+	while (*big && little_len <= len)
+	{
+		if (ft_strncmp(big, little, little_len) == 0)
+			return ((char *)big);
+		big++;
+		len--;
+	}
+	return (NULL);
+}

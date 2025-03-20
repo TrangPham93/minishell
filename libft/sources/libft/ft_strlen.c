@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/20 15:14:29 by trpham           ###   ########.fr       */
+/*   Created: 2024/11/01 16:40:20 by trpham            #+#    #+#             */
+/*   Updated: 2025/01/16 17:56:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/includes/libft.h"
-#include <stdio.h>
+#include "../../includes/libft.h"
 
-typedef struct s_command
+size_t	ft_strlen(const char *s)
 {
-	
-}	t_command;
+	size_t	count;
+
+	if (!s)
+		return (0);
+	count = 0;
+	while (*s)
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
