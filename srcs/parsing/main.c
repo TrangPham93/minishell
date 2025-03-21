@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 15:47:03 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 16:18:07 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	convert_user_input_to_token(char *line)
 			new_token = create_token(args[i], 5);
 		if (!new_token)
 		{
-			printf("Failed to malloc \n");
+			perror("Failed to malloc\n");
 			return ;
 		}
 		if (i == 0)
