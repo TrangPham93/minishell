@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 12:46:34 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:01:54 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,5 @@ typedef struct s_token
 void	free_string(char *s);
 void	free_array(char **arr, int i);
 int		array_size(char **arr);
+void	print_working_history(void);
+
