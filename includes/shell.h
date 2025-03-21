@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 13:01:54 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:22:32 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,28 @@ typedef struct s_shell
 	
 }	t_shell;
 
-
+/* Type 1 : operator, 
+		2 : separators,
+		3 : keywords,
+		4 : identifiers,
+		5 : literals 
+*/
 typedef struct s_token
 {
-	char	*str;
-	int		type;
-	struct s_token	*next_token;
-	struct s_token	*prev_token;
+	char	*value;
+	int		type; 
+	struct s_token	*next;
+	struct s_token	*previvous;
 }	t_token;
+
+/* Tokenization */
+int		is_comment(char *s);
+int		is_operator(char *s);
+int		is_separator(char *s);
+int		is_keyword(char *s);
+int		is_identifier(char *s);
+t_token	*create_token(char *s, int i);
+
 
 
 

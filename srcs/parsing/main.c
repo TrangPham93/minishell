@@ -6,14 +6,14 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 13:11:35 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:27:56 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void shell_interactive(void);
-void	convert_user_input_to_token(char **args);
+void	shell_interactive(void);
+void	convert_user_input_to_token(char *line);
 
 
 int	main(int ac, char *av[], char *env[])
@@ -24,9 +24,6 @@ int	main(int ac, char *av[], char *env[])
 	(void) av;
 	shell_interactive();
 	
-	
-	
-
 	return (0);	
 }
 
@@ -35,10 +32,9 @@ int	main(int ac, char *av[], char *env[])
 	Type exit to exit the prompt.
  */
 
-void shell_interactive(void)
+void	shell_interactive(void)
 {
 	char	*line;
-	char	**args;
 
 	while (1)
 	{
@@ -54,8 +50,7 @@ void shell_interactive(void)
 			print_working_history();
 		else
 		{
-			args = ft_split(line, ' ');
-			convert_user_input_to_token(args);
+			convert_user_input_to_token(line);
 		}
 		free_string(line);
 		line = NULL;
@@ -70,15 +65,45 @@ void	print_working_history(void)
 /* 
 	Split user input by space and categorize the input type.
 	Each token includes string value and its type (command, operators, etc.)
+	-> tokenization
  */
-void	convert_user_input_to_token(char **args)
+void	convert_user_input_to_token(char *line)
 {
 	int		i;
+	char	**args;
+	t_token	*new_token;
+	t_token	*token_input;
 
+
+	if (is_comment(line) == 0)
+		return ;
+	args = ft_split(line, ' ');
 	i = 0;
-	while (args[i] != NULL)
+	while (args[i])
 	{
 		printf("%s\n", args[i]);
+		i++;
+	}
+	i = 0;
+	while (args[i])
+	{
+		if (is_operator(args[i]) == 0)
+			new_token = create_token(args[i], 1);
+		else if (is_separator(args[i]) == 0)
+			new_token = create_token(args[i], 2);
+		else if (is_keyword(args[i]) == 0)
+			new_token = create_token(args[i], 3);
+		else if (is_identifier(args[1]) == 0)
+			new_token = create_token(args[i], 4);
+		else
+			new_token = create_token(args[i], 5);
+		if (i != 0)
+			token_input = new_token;
+		else
+		{
+			token_input->next = new_token;
+			new_token->previvous = token_input;
+		}
 		i++;
 	}
 	free_array(args, array_size(args));
