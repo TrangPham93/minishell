@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/03/21 12:38:23 by trpham           ###   ########.fr        #
+#    Updated: 2025/03/21 15:30:24 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS_DIR = ./srcs/parsing
 SRCS = $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/parser.c \
-		$(SRCS_DIR)/lexer.c \
+		$(SRCS_DIR)/lexing_analyzer.c \
+		$(SRCS_DIR)/token_linklist.c \
 		$(SRCS_DIR)/helper.c
 		
 

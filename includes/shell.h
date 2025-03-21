@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 15:22:32 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:46:47 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_token
 	char	*value;
 	int		type; 
 	struct s_token	*next;
-	struct s_token	*previvous;
+	struct s_token	*prev;
 }	t_token;
 
 /* Tokenization */
@@ -51,4 +51,6 @@ void	free_string(char *s);
 void	free_array(char **arr, int i);
 int		array_size(char **arr);
 void	print_working_history(void);
+void	print_linked_list(t_token *head);
+
 

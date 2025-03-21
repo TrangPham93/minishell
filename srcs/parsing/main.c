@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 15:27:56 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:47:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	convert_user_input_to_token(char *line)
 	char	**args;
 	t_token	*new_token;
 	t_token	*token_input;
+	t_token *temp;
 
 
 	if (is_comment(line) == 0)
@@ -93,19 +94,29 @@ void	convert_user_input_to_token(char *line)
 			new_token = create_token(args[i], 2);
 		else if (is_keyword(args[i]) == 0)
 			new_token = create_token(args[i], 3);
-		else if (is_identifier(args[1]) == 0)
+		else if (is_identifier(args[i]) == 0)
 			new_token = create_token(args[i], 4);
 		else
 			new_token = create_token(args[i], 5);
-		if (i != 0)
+		if (!new_token)
+		{
+			printf("Failed to malloc \n");
+			return ;
+		}
+		if (i == 0)
+		{
 			token_input = new_token;
+			temp = token_input;
+		}
 		else
 		{
-			token_input->next = new_token;
-			new_token->previvous = token_input;
+			temp->next = new_token;
+			new_token->prev = temp;
+			temp = temp->next;
 		}
 		i++;
 	}
 	free_array(args, array_size(args));
-	args = NULL;
+	// args = NULL; args goes out of scope, no longer accessible at the end of function, no need to set NULL
+	print_linked_list(token_input);
 }

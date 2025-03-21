@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:37:07 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 12:46:21 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/21 15:47:49 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ int	array_size(char **arr)
 		i++;
 	}
 	return (i);
+}
+
+void	print_linked_list(t_token *head)
+{
+	t_token	*temp;
+
+	temp = head;
+	while (temp)
+	{
+		if (temp)
+			printf("Value of input tokens %s\n", temp->value);
+		temp = temp->next;
+	}
 }
