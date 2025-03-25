@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 16:18:07 by trpham           ###   ########.fr       */
+/*   Updated: 2025/03/25 15:08:44 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	shell_interactive(void)
 			print_working_history();
 		else
 		{
+			// if (validate_input(line) == -1)
+			// 	return ;
 			convert_user_input_to_token(line);
 		}
 		free_string(line);
@@ -82,22 +84,25 @@ void	convert_user_input_to_token(char *line)
 	i = 0;
 	while (args[i])
 	{
-		printf("%s\n", args[i]);
+		if (validate_input(args[i]) == -1)
+			return ;
 		i++;
 	}
 	i = 0;
 	while (args[i])
 	{
-		if (is_operator(args[i]) == 0)
-			new_token = create_token(args[i], 1);
-		else if (is_separator(args[i]) == 0)
-			new_token = create_token(args[i], 2);
+		if (ft_strcmp(args[i], "|") == 0)
+			new_token = create_token(args[i], PIPE);
 		else if (is_keyword(args[i]) == 0)
-			new_token = create_token(args[i], 3);
-		else if (is_identifier(args[i]) == 0)
-			new_token = create_token(args[i], 4);
-		else
-			new_token = create_token(args[i], 5);
+			new_token = create_token(args[i], KEYWORD);
+		else if (is_redirection(args[i]) == 0)
+			new_token = create_token(args[i], REDIRECTION);
+		// else if (is_separator(args[i]) == 0)
+		// 	new_token = create_token(args[i], SEPARATOR);
+		// else if (is_identifier(args[i]) == 0)
+		// 	new_token = create_token(args[i], IDENTIFIER);
+		// else
+		// 	new_token = create_token(args[i], LITERAL);
 		if (!new_token)
 		{
 			perror("Failed to malloc\n");

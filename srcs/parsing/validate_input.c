@@ -1,62 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/21 12:37:07 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/25 12:22:27 by trpham           ###   ########.fr       */
+/*   Created: 2025/03/25 14:25:27 by trpham            #+#    #+#             */
+/*   Updated: 2025/03/25 15:18:37 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	free_string(char *s)
+int	validate_input(char *str)
 {
-	if (s)
-	{
-		free(s);
-		s = NULL;
-	}
-}
-
-void free_array(char **arr, int i)
-{
-	int	j;
-
-	j = 0;
-	while (j < i)
-	{
-		free_string(arr[j]);
-		j++;
-	}
-	free(arr);
-}
-
-int	array_size(char **arr)
-{
+	int	is_open_quote;
 	int	i;
-
+	
+	is_open_quote = -1;
 	i = 0;
-	while (arr[i])
+	if (!str)
+		return (-1);
+	// if (str[i] == '"')
+	// 	is_open_quote = 0;
+	while (str[i])
 	{
+		if (i == 0 && str[i] == '"')
+			is_open_quote = 0;
+		
 		i++;
 	}
-	return (i);
+	
+	
+	return (0);
 }
 
-void	print_linked_list(t_token *head)
+int	check_double_quote(char *line)
 {
-	t_token	*temp;
-
-	temp = head;
-	while (temp)
-	{
-		if (temp)
-		{
-			printf("Value of input tokens %s type %d\n", temp->value, temp->type);
-		}
-		temp = temp->next;
-	}
+	
+	return (0);
 }
