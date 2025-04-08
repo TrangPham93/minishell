@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/25 15:08:44 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 16:54:39 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,96 +32,132 @@ int	main(int ac, char *av[], char *env[])
 	Type exit to exit the prompt.
  */
 
-void	shell_interactive(void)
-{
-	char	*line;
-
-	while (1)
-	{
-		line =	readline("minishell$ ");
-		add_history(line);
-		// printf("%s\n", line);
-		if (ft_strcmp(line, "exit") == 0)
-		{
-			free_string(line);
-			return;
-		}
-		if (ft_strcmp(line, "history") == 0)
-			print_working_history();
-		else
-		{
-			// if (validate_input(line) == -1)
-			// 	return ;
-			convert_user_input_to_token(line);
-		}
-		free_string(line);
-		line = NULL;
-	}
-}
-
-void	print_working_history(void)
-{
-	printf("Add working history function here\n");
-}
-
-/* 
-	Split user input by space and categorize the input type.
-	Each token includes string value and its type (command, operators, etc.)
-	-> tokenization
- */
-void	convert_user_input_to_token(char *line)
-{
-	int		i;
-	char	**args;
-	t_token	*new_token;
-	t_token	*token_input;
-	t_token *temp;
-
-
-	if (is_comment(line) == 0)
-		return ;
-	args = ft_split(line, ' ');
-	i = 0;
-	while (args[i])
-	{
-		if (validate_input(args[i]) == -1)
-			return ;
-		i++;
-	}
-	i = 0;
-	while (args[i])
-	{
-		if (ft_strcmp(args[i], "|") == 0)
-			new_token = create_token(args[i], PIPE);
-		else if (is_keyword(args[i]) == 0)
-			new_token = create_token(args[i], KEYWORD);
-		else if (is_redirection(args[i]) == 0)
-			new_token = create_token(args[i], REDIRECTION);
-		// else if (is_separator(args[i]) == 0)
-		// 	new_token = create_token(args[i], SEPARATOR);
-		// else if (is_identifier(args[i]) == 0)
-		// 	new_token = create_token(args[i], IDENTIFIER);
-		// else
-		// 	new_token = create_token(args[i], LITERAL);
-		if (!new_token)
-		{
-			perror("Failed to malloc\n");
-			return ;
-		}
-		if (i == 0)
-		{
-			token_input = new_token;
-			temp = token_input;
-		}
-		else
-		{
-			temp->next = new_token;
-			new_token->prev = temp;
-			temp = temp->next;
-		}
-		i++;
-	}
-	free_array(args, array_size(args));
-	// args = NULL; args goes out of scope, no longer accessible at the end of function, no need to set NULL
-	print_linked_list(token_input);
-}
+ void	shell_interactive(void)
+ {
+	 char	*line;
+ 
+	 while (1)
+	 {
+		 line =	readline("minishell$ ");
+		 if (!line)
+			 return;
+		 // add_history(line);
+		 // printf("%s\n", line);
+		 if (ft_strcmp(line, "exit") == 0)
+		 {
+			 free_string(line);
+			 return;
+		 }
+		 if (ft_strcmp(line, "history") == 0)
+			 print_working_history();
+		 else if (ft_strcmp(line, "") != 0)
+		 {
+			 add_history(line);
+			 // if (validate_input(line) == -1)
+			 // 	return ;
+			 convert_user_input_to_token(line);
+		 }
+		 free_string(line);
+		 line = NULL;
+	 }
+ }
+ 
+ void	print_working_history(void)
+ {
+	 printf("Add working history function here\n");
+ }
+ 
+ /* 
+	 Split user input by space and categorize the input type.
+	 Each token includes string value and its type (command, operators, etc.)
+	 -> tokenization
+  */
+ void	convert_user_input_to_token(char *line)
+ {
+	 int		i;
+	 char	**args;
+	 t_token	*new_token;
+	 t_token	*tokenized_input_list;
+	 t_token *temp;
+ 
+ 
+	 if (is_comment(line) == 0)
+		 return ;
+	 args = ft_split(line, ' ');
+	 // i = 0;
+	 // while (args[i])
+	 // {
+	 // 	// printf("print after split %s\n", args[i]);
+	 // 	if (validate_input(args[i]) == -1)
+	 // 		return ;
+	 // 	i++;
+	 // }
+	 i = 0;
+	 while (args[i])
+	 {
+		 
+		 if (is_pipe(args[i]) == 0)
+		 {
+			 // printf("This is an operator\n");
+			 new_token = create_token(args[i], PIPE);
+		 }
+		 else if (is_redirection(args[i]) == 0)
+		 {
+			 new_token = create_token(args[i], REDIRECTION);
+		 }
+		 else if (is_quote(args[i]) == 0)
+		 {
+			 // printf("This is a redirection\n");
+			 new_token = create_token(args[i], QUOTE);
+		 }
+		 else if (is_keyword(args[i]) == 0)
+		 {
+			 // printf("This is a keyword\n");
+			 new_token = create_token(args[i], KEYWORD);
+		 }
+		 // else if (is_separator(args[i]) == 0)
+		 // 	new_token = create_token(args[i], SEPARATOR);
+		 // else if (is_identifier(args[i]) == 0)
+		 // 	new_token = create_token(args[i], IDENTIFIER);
+		 else
+		 {
+			 // printf("This is a text\n");
+			 new_token = create_token(args[i], WORD);
+		 }
+		 // printf("%s\n", new_token->value);
+ 
+		 if (!new_token)
+		 {
+			 perror("Failed to malloc\n");
+			 return ;
+		 }
+		 if (i == 0)
+		 {
+			 tokenized_input_list = new_token;
+			 temp = tokenized_input_list;
+			 // printf("%s\n", tokenized_input_list->value);
+		 }
+		 else
+		 {
+			 temp->next = new_token;
+			 new_token->prev = temp;
+			 temp = temp->next;
+			 // printf("%s\n", tokenized_input_list->value);
+		 }
+		 i++;
+	 }
+	 // args = NULL; args goes out of scope, no longer accessible at the end of function, no need to set NULL
+	 free_array(args, array_size(args));
+	 print_linked_list(tokenized_input_list);
+	 validate_token(tokenized_input_list);
+ }
+ 
+ void	validate_token(t_token *token)
+ {
+	 t_token	*temp;
+ 
+	 temp = token;
+	 if (temp->type == PIPE)
+	 
+	 printf("Validate token %s\n", token->value);
+ }

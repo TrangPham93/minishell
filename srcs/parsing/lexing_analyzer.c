@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:05:26 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/25 14:20:13 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 16:53:13 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,27 @@ int	is_keyword(char *s)
 int	is_redirection(char *s)
 {
 	
-	if (ft_strcmp(s, "<<") == 0 || ft_strcmp(s, ">>") == 0)
-		return (0);
+	// char	*operators[] = {"||", "&&", "&", ";", ";;", ";&", ";;&", "|", "|&", "(", ")", "\n", NULL};
+	char	*redirections[] = {"<", ">", "<<", ">>", NULL};
+	int		i;
+
+	i = 0;
+	// while (i < 12)
+	// {
+	// 	printf("%s", redirections[i]);
+	// 	i++;
+	// }
+	// printf("finish printing redirections\n");
+	// i = 0;
+	while (redirections[i])
+	{
+		// printf("%s with %s\n", redirections[i], s);
+		if (ft_strcmp(redirections[i], s) == 0)
+		{
+			return (0);
+		}
+		i++;	
+	}
 	return (-1);
 }
 
@@ -78,6 +97,21 @@ int	is_operator(char *s)
 		}
 		i++;	
 	}
+	return (-1);
+}
+int	is_quote(char *s)
+{
+	
+	if (ft_strcmp(s, "\'") == 0 || ft_strcmp(s, "\"") == 0)
+		return (0);
+	return (-1);
+}
+
+int	is_pipe(char *s)
+{
+	
+	if (ft_strcmp(s, "|") == 0)
+		return (0);
 	return (-1);
 }
 
