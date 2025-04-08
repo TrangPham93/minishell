@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/25 14:27:58 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 16:52:03 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,22 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+
 // # define OPERATOR 1
 // # define SEPARATOR 2
-// # define KEYWORD 3
 // # define IDENTIFIER 4
-// # define LITERAL 5
 # define PIPE 1
-# define KEYWORD 2
-# define REDIRECTION 3
+# define REDIRECTION 2
+# define QUOTE 3
+# define KEYWORD 4
+# define WORD 5
 
 typedef struct s_shell
 {
-	
+	char	**envp;
+	char	*pwd;
+	char	*old_pwd;
+	char	*path;
 }	t_shell;
 
 typedef struct s_token
@@ -48,12 +52,16 @@ int	validate_input(char *str);
 /* Tokenization */
 int		is_comment(char *s);
 int		is_keyword(char *s);
+int	is_quote(char *s);
+int	is_pipe(char *s);
+
 int		is_redirection(char *s);
 int		is_operator(char *s);
 int		is_separator(char *s);
 int		is_identifier(char *s);
-t_token	*create_token(char *s, int i);
 
+t_token	*create_token(char *s, int i);
+void	validate_token(t_token *token);
 
 
 
