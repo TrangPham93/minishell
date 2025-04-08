@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 12:37:07 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/25 12:22:27 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 19:35:23 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,25 @@ void	print_linked_list(t_token *head)
 		}
 		temp = temp->next;
 	}
+}
+
+int	calculate_linked_list_size(t_token *head)
+{
+	t_token	*temp;
+	int		len;
+
+	temp = head;
+	len = 0;
+	while (temp)
+	{
+		len++;
+		temp = temp->next;
+	}
+	return (len);
+}
+
+void	print_syntax_error(char *msg)
+{
+	if (msg)
+		ft_putstr_fd(msg, 2);
 }

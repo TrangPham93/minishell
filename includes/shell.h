@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/04/08 16:52:03 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 19:35:32 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,49 @@
 // # define OPERATOR 1
 // # define SEPARATOR 2
 // # define IDENTIFIER 4
-# define PIPE 1
-# define REDIRECTION 2
-# define QUOTE 3
-# define KEYWORD 4
-# define WORD 5
+// # define PIPE 1
+// # define REDIRECTION 2
+// # define QUOTE 3
+// # define KEYWORD 4
+// # define WORD 5
 
-typedef struct s_shell
+typedef enum	e_token_type
 {
-	char	**envp;
-	char	*pwd;
-	char	*old_pwd;
-	char	*path;
-}	t_shell;
+	REDIRECTION,
+	QUOTE,
+	KEYWORD,
+	WORD,
+	PIPE,
+	IN, //<
+	OUT, //>
+	HEREDOC, // <<
+	APPEND // >>
+}	t_token_type;
 
-typedef struct s_token
+typedef struct	s_token
 {
-	char	*value;
-	int		type; 
+	char			*value;
+	t_token_type	type; 
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
+
+typedef enum	e_error_type
+{
+	ERR_NONE,
+	ERR_MALLOC,
+	ERR_PIPE
+}	t_error_type;
+
+typedef struct s_shell
+{
+	char			**envp;
+	char			*pwd;
+	char			*old_pwd;
+	char			*path;
+	t_error_type	err_type;
+	t_token			*tokens;
+}	t_shell;
 
 /* Validate input */
 int	validate_input(char *str);
@@ -60,7 +82,7 @@ int		is_operator(char *s);
 int		is_separator(char *s);
 int		is_identifier(char *s);
 
-t_token	*create_token(char *s, int i);
+t_token	*create_token(char *s, t_token_type i);
 void	validate_token(t_token *token);
 
 
@@ -71,5 +93,7 @@ void	free_array(char **arr, int i);
 int		array_size(char **arr);
 void	print_working_history(void);
 void	print_linked_list(t_token *head);
+void	print_syntax_error(char *msg);
+
 
 # endif

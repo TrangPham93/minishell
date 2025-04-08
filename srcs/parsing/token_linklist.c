@@ -6,13 +6,13 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 15:27:47 by trpham            #+#    #+#             */
-/*   Updated: 2025/03/21 16:04:18 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/08 19:22:46 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-t_token	*create_token(char *s, int i)
+t_token	*create_token(char *s, t_token_type i)
 {
 	t_token	*new_token;
 
