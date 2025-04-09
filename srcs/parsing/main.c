@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:57:54 by trpham            #+#    #+#             */
-/*   Updated: 2025/04/08 19:36:48 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/09 06:46:14 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,21 +96,21 @@ void	convert_user_input_to_token(char *line)
 	while (args[i])
 	{
 		
-		if (is_pipe(args[i]) == 0)
+		if (is_pipe(args[i]) == TRUE)
 		{
 			// printf("This is an operator\n");
 			new_token = create_token(args[i], PIPE);
 		}
-		else if (is_redirection(args[i]) == 0)
+		else if (is_redirection(args[i]) == TRUE)
 		{
 			new_token = create_token(args[i], REDIRECTION);
 		}
-		else if (is_quote(args[i]) == 0)
+		else if (is_quote(args[i]) == TRUE)
 		{
 			// printf("This is a redirection\n");
 			new_token = create_token(args[i], QUOTE);
 		}
-		else if (is_keyword(args[i]) == 0)
+		else if (is_keyword(args[i]) == TRUE)
 		{
 			// printf("This is a keyword\n");
 			new_token = create_token(args[i], KEYWORD);
@@ -148,36 +148,7 @@ void	convert_user_input_to_token(char *line)
 	}
 	// args = NULL; args goes out of scope, no longer accessible at the end of function, no need to set NULL
 	free_array(args, array_size(args));
-	print_linked_list(tokenized_input_list);
+	// print_linked_list(tokenized_input_list);
 	validate_token(tokenized_input_list);
 }
 
-void	validate_token(t_token *token)
-{
-	t_token	*temp;
-
-	temp = token;
-	if (temp->type == PIPE)
-	{
-		print_syntax_error("Error: Pipe at start\n");
-		return ;
-	}
-	while (temp)
-	{
-		if (temp->type == PIPE && temp->next == NULL)
-		{
-			print_syntax_error("Error: Pipe at the end\n");
-			return ;
-		}
-		if (ft_strcmp(temp->value, "||") == 0)
-		{
-			print_syntax_error("Error: Double pipe\n");
-			return ;
-		}
-		temp = temp->next;
-	}
-	
-	
-	// printf("Validate token %s\n", token->value);
- }
- 

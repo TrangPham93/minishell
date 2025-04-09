@@ -6,7 +6,7 @@
 #    By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/13 10:30:26 by trpham            #+#    #+#              #
-#    Updated: 2025/03/21 15:30:24 by trpham           ###   ########.fr        #
+#    Updated: 2025/04/09 06:22:44 by trpham           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS = $(SRCS_DIR)/main.c \
 		$(SRCS_DIR)/parser.c \
 		$(SRCS_DIR)/lexing_analyzer.c \
 		$(SRCS_DIR)/token_linklist.c \
-		$(SRCS_DIR)/helper.c
+		$(SRCS_DIR)/helper.c \
+		$(SRCS_DIR)/validate_input.c
 		
 
 OBJS = $(SRCS:%.c=%.o)

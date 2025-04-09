@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:05:26 by trpham            #+#    #+#             */
-/*   Updated: 2025/04/08 16:53:13 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/09 06:45:28 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ int is_comment(char *s)
 	while(s[i])
 	{
 		if (s[i] == '#')
-			return (0);
+			return (TRUE);
 		i++;
 	}
-	return (-1);
+	return (FALSE);
 }
 
 /* Shell reserves words */
@@ -38,10 +38,10 @@ int	is_keyword(char *s)
 	while (keywords[i])
 	{
 		if (ft_strcmp(keywords[i], s) == 0)
-			return (0);
+			return (TRUE);
 		i++;	
 	}
-	return (-1);
+	return (FALSE);
 }
 
 /* Redirection operator: >> , << */
@@ -65,11 +65,11 @@ int	is_redirection(char *s)
 		// printf("%s with %s\n", redirections[i], s);
 		if (ft_strcmp(redirections[i], s) == 0)
 		{
-			return (0);
+			return (TRUE);
 		}
 		i++;	
 	}
-	return (-1);
+	return (FALSE);
 }
 
 
@@ -93,26 +93,26 @@ int	is_operator(char *s)
 		if (ft_strcmp(operators[i], s) == 0)
 		{
 			
-			return (0);
+			return (TRUE);
 		}
 		i++;	
 	}
-	return (-1);
+	return (FALSE);
 }
 int	is_quote(char *s)
 {
 	
 	if (ft_strcmp(s, "\'") == 0 || ft_strcmp(s, "\"") == 0)
-		return (0);
-	return (-1);
+		return (TRUE);
+	return (FALSE);
 }
 
 int	is_pipe(char *s)
 {
 	
 	if (ft_strcmp(s, "|") == 0)
-		return (0);
-	return (-1);
+		return (TRUE);
+	return (FALSE);
 }
 
 /* Metacharacter: when unquoted, separates words */

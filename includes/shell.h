@@ -6,7 +6,7 @@
 /*   By: trpham <trpham@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 16:41:06 by trpham            #+#    #+#             */
-/*   Updated: 2025/04/08 19:35:32 by trpham           ###   ########.fr       */
+/*   Updated: 2025/04/09 06:51:29 by trpham           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-
+#define TRUE 0
+#define FALSE -1
 // # define OPERATOR 1
 // # define SEPARATOR 2
 // # define IDENTIFIER 4
@@ -67,23 +68,23 @@ typedef struct s_shell
 	t_token			*tokens;
 }	t_shell;
 
-/* Validate input */
-int	validate_input(char *str);
-
 
 /* Tokenization */
 int		is_comment(char *s);
 int		is_keyword(char *s);
-int	is_quote(char *s);
-int	is_pipe(char *s);
-
+int		is_quote(char *s);
+int		is_pipe(char *s);
 int		is_redirection(char *s);
-int		is_operator(char *s);
-int		is_separator(char *s);
-int		is_identifier(char *s);
-
+// int		is_operator(char *s);
+// int		is_separator(char *s);
+// int		is_identifier(char *s);
 t_token	*create_token(char *s, t_token_type i);
+
+/* Validate input */
+int		is_valid_pipe(t_token *token);
 void	validate_token(t_token *token);
+int	is_valid_quote(t_token *token);
+int	check_double_quote(char *str);
 
 
 
