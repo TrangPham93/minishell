@@ -2,8 +2,8 @@
 
 ## About project 
 
-Minishell is a team project developed at Hive Helsinki (the 42 Network) as part of curriculum. 
-It is a minimal recreation of the Bash shell, implemented in C, with core features such as built-in command execution, process handling, and basic shell grammar parsing.
+Minishell is a group project developed at Hive Helsinki (the 42 Network) as part of curriculum. 
+It is a minimal recreation of the Bash shell, implemented in C, for Linux operating system.
 
 Minishell reads user commands, parses them, handles pipes and redirections, and executes built-in or external programs with proper environment management and signal handling.
 
@@ -27,8 +27,9 @@ focusing on process control, parsing, and environment management.
 
 ### 🔹 Shell Grammar & Parsing
 - Pipes (`|`)  
-- Redirections (`>`, `<`, `>>`, `<<`)  
-- Heredoc (`<< limiter`) with variable expansion inside double quotes  
+- Redirections (`>`, `<`)
+- Append (`<<`)
+- Heredoc (`<<`) with variable expansion inside double quotes  
 - Quote handling (`'single'` and `"double"`)  
 - Environment variable expansion (`$HOME`, `$USER`, `$?`, etc.)  
 
@@ -39,28 +40,32 @@ focusing on process control, parsing, and environment management.
 
 ## How to use:
 
-### 1️⃣ Clone the Repository
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/<your-username>/minishell.git
+git clone git@github.com:TrangPham93/minishell_Hive_Helsinki.git minishell
 cd minishell
 ```
-### 2️⃣ Compile the Project
+### 2. Compile the Project
 ```bash
 make
 ```
-### 3️⃣ Run Minishell
+### 3. Run Minishell
 ```bash
 ./minishell
 ```
 
-#### :4: Examples
+### 4. Examples
+
+<img width="400" height="150" alt="image" src="https://github.com/user-attachments/assets/02cf4b65-aca0-42eb-9aaa-60591193fe6b" />
 
 ## Authors
 
-Trang Pham – GitHub
-Ha Nguyen – GitHub
+Trang Pham – GitHub <https://github.com/TrangPham93>
+
+Ha Nguyen – GitHub <https://github.com/hnguyen279>
 
 ## License or acknowledgment
 
 This project is part of the Hive Helsinki / 42 Network curriculum.
+
 It was created for educational purposes only.
