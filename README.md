@@ -1,6 +1,6 @@
 # Minishell
 
-## About project 
+## About Project 
 
 Minishell is a group project developed at Hive Helsinki (the 42 Network) as part of curriculum. 
 It is a minimal recreation of the Bash shell, implemented in C.
@@ -37,7 +37,7 @@ This project was built by Trang Pham and Ha Nguyen, and is designed to deepen un
 - `Ctrl+D` → Exit minishell  
 - `Ctrl+\` → Ignored (as in Bash)
 
-## How to use:
+## How To Run:
 
 ### Requirements:
 Linux OS
@@ -67,7 +67,7 @@ Trang Pham – GitHub <https://github.com/TrangPham93>
 
 Ha Nguyen – GitHub <https://github.com/hnguyen279>
 
-## License or acknowledgment
+## Notes
 
 This project is part of the Hive Helsinki / 42 Network curriculum.
 
