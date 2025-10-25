@@ -45,7 +45,7 @@ Linux OS
 ### Installment:
 #### 1. Clone the Repository
 ```bash
-git clone git@github.com:TrangPham93/minishell_Hive_Helsinki.git minishell
+git clone https://github.com/TrangPham93/minishell.git minishell
 cd minishell
 ```
 #### 2. Compile the Project
