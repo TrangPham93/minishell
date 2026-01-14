@@ -63,9 +63,9 @@ make
 
 ## Authors
 
-Trang Pham – GitHub <https://github.com/TrangPham93>
+Trang Pham – [GitHub](https://github.com/TrangPham93)
 
-Ha Nguyen – GitHub <https://github.com/hnguyen279>
+Ha Nguyen – [GitHub](https://github.com/hnguyen279)
 
 ## Notes
 
